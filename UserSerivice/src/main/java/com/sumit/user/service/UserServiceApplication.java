@@ -1,6 +1,5 @@
 package com.sumit.user.service;
 
-import com.netflix.discovery.EurekaNamespace;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -23,7 +23,7 @@ public class HotelController {
 
 
     @GetMapping("/{hotelId}")
-    public ResponseEntity<Hotel> getById(@RequestBody String hotelId){
+    public ResponseEntity<Hotel> getById(@PathVariable String hotelId){
         return ResponseEntity.status(HttpStatus.CREATED).body(hotelService.get(hotelId));
     }
 
