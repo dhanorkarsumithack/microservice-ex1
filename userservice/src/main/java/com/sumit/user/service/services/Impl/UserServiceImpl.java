@@ -4,6 +4,7 @@ import com.sumit.user.service.entities.Hotel;
 import com.sumit.user.service.entities.Rating;
 import com.sumit.user.service.entities.User;
 import com.sumit.user.service.exceptions.ResourceNotFoundException;
+import com.sumit.user.service.external.services.HotelService;
 import com.sumit.user.service.repositories.UserRepository;
 import com.sumit.user.service.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private HotelService hotelService;
 
 
     @Override
@@ -50,8 +54,9 @@ public class UserServiceImpl implements UserService {
 
         List<Rating> ratingList = list.stream().map(rating -> {
             //api call to hotel service hotel
-            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
-            Hotel hotel = forEntity.getBody();
+//            ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
+
+            Hotel hotel = hotelService.getHotel(rating.getHotelId());
             //set hotel to rating
             rating.setHotel(hotel);
             return rating;
